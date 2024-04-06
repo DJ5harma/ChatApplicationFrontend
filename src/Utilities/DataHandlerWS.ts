@@ -11,27 +11,21 @@ export default function DataHandlerWS({
 	switch (DATA.type) {
 		case "allUsers":
 			setUsers(DATA.users);
-			setOnlineUsers((onlineUsers) => {
-				DATA.onlineUsers.forEach((username: string) =>
-					onlineUsers.add(username)
-				);
-				return onlineUsers;
-			});
+			DATA.onlineUsers.forEach((username: string) =>
+				onlineUsers.add(username)
+			);
+			setOnlineUsers(onlineUsers);
 			break;
 
 		case "userOnline":
-			setOnlineUsers((onlineUsers) => {
-				onlineUsers.add(DATA.username);
-				return onlineUsers;
-			});
+			onlineUsers.add(DATA.username);
+			setOnlineUsers(onlineUsers);
 			setNumberOfOnlineUsers(onlineUsers.size);
 			break;
 
 		case "userOffline":
-			setOnlineUsers((onlineUsers) => {
-				onlineUsers.delete(DATA.username);
-				return onlineUsers;
-			});
+			onlineUsers.delete(DATA.username);
+			setOnlineUsers(onlineUsers);
 			setNumberOfOnlineUsers(onlineUsers.size);
 			break;
 
