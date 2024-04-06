@@ -20,7 +20,7 @@ export default function Form() {
 		if (data.error) toast.error(data.error);
 		else {
 			setUsername(data.username);
-			setId(data.id);
+			setId(data._id);
 			setLoggedIn(true);
 			toast.success(data.message);
 		}
