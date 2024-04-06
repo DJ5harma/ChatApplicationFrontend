@@ -11,9 +11,12 @@ export default function DataHandlerWS({
 	switch (DATA.type) {
 		case "allUsers":
 			setUsers(DATA.users);
-			DATA.onlineUsers.forEach((username: string) =>
-				onlineUsers.add(username)
-			);
+			setOnlineUsers((onlineUsers) => {
+				DATA.onlineUsers.forEach((username: string) =>
+					onlineUsers.add(username)
+				);
+				return onlineUsers;
+			});
 			break;
 
 		case "userOnline":
