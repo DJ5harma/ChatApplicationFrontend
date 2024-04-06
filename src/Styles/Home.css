@@ -1,0 +1,61 @@
+#home {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+
+	#leftSection {
+		display: flex;
+		border-right: solid;
+		flex-direction: column;
+
+		font-size: 20px;
+		div {
+			width: 100%;
+			border-top: solid;
+		}
+		#usersSection {
+			padding: 0 10px;
+
+			.singleUser {
+				display: flex;
+				padding: 10px;
+				gap: 10px;
+				align-items: center;
+				border: solid 2px;
+				border-radius: 10px;
+
+				margin: 10px 0;
+
+				cursor: pointer;
+
+				.namePic {
+					padding: 5px 16px;
+					border-radius: 30px;
+					background-color: rgb(29, 27, 27);
+					border: solid 2px;
+				}
+			}
+		}
+	}
+	#rightSection {
+		flex: 2;
+		display: flex;
+		flex-direction: column;
+		gap: 8;
+		padding-top: 10px;
+
+		#inputSection {
+			padding: 10px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			input {
+				padding: 8px;
+			}
+			button {
+				padding: 10px;
+				font-size: large;
+			}
+		}
+	}
+}
