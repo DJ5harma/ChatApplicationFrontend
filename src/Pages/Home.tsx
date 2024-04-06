@@ -43,7 +43,10 @@ export default function Home() {
 					<h3 style={{ textAlign: "center" }}>
 						OnlineUsers: {numberOfOnlineUsers}
 					</h3>
-					<div style={{ flex: 10 }} id="usersSection">
+					<div
+						style={{ flex: 10, overflow: "auto" }}
+						id="usersSection"
+					>
 						{users
 							.filter((user) => username !== user.username)
 							.map(({ username, _id }) => (
