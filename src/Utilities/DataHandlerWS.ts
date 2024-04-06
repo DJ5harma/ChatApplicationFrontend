@@ -15,6 +15,7 @@ export default function DataHandlerWS({
 				onlineUsers.add(username)
 			);
 			setOnlineUsers(onlineUsers);
+			setNumberOfOnlineUsers(onlineUsers.size);
 			break;
 
 		case "userOnline":
