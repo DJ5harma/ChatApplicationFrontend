@@ -74,7 +74,7 @@ export default function Form({ wss }: { wss: WebSocket }) {
 			<input
 				type="password"
 				placeholder={`Password ${
-					pageType === "Register" && "(min. 6 chars)"
+					pageType === "Register" ? "(min. 6 chars)" : ""
 				}`}
 				value={user.password}
 				onChange={(e) => setUser({ ...user, password: e.target.value })}
