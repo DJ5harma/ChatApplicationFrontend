@@ -10,7 +10,7 @@ export default function TopRightBar() {
 				display: "flex",
 				justifyContent: "center",
 				alignItems: "center",
-				backgroundColor: "rgba(0,0,0,0.5)",
+				backgroundColor: "rgb(0,0,0)",
 			}}
 		>
 			<h3>

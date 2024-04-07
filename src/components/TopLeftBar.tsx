@@ -16,7 +16,7 @@ export default function TopLeftBar({
 				justifyContent: "center",
 				alignItems: "center",
 				padding: "2px 4px",
-				backgroundColor: "rgb(10,10,30)",
+				backgroundColor: "rgb(0,0,0)",
 				gap: 10,
 			}}
 		>

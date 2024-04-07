@@ -7,7 +7,7 @@ export default function InputSection({ wss }: { wss: WebSocket | undefined }) {
 
 	if (selectedUser._id === "null") {
 		return (
-			<div style={{ padding: 20 }}>
+			<div style={{ padding: 20, backgroundColor: "rgb(0,0,0)" }}>
 				<h3>Please select a user to exchange messages!</h3>
 			</div>
 		);
