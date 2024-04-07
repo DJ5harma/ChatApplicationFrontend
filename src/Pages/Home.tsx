@@ -10,6 +10,7 @@ import { UserType } from "../Utilities/DataTypes";
 import ChatSection from "../components/ChatSection";
 import MessageProvider from "../contexts/Messages/MessagesProvider";
 import TopRightBar from "../components/TopRightBar";
+import TopLeftBar from "../components/TopLeftBar";
 
 export default function Home({ wss }: { wss: WebSocket }) {
 	const [users, setUsers] = useState<UserType[]>([]);
@@ -33,12 +34,8 @@ export default function Home({ wss }: { wss: WebSocket }) {
 		<div id="home">
 			<MessageProvider wss={wss}>
 				<div id="leftSection">
-					<p style={{ flex: 1, textAlign: "center" }}>
-						user: {username}
-					</p>
-					<h3 style={{ textAlign: "center" }}>
-						OnlineUsers: {numberOfOnlineUsers}
-					</h3>
+					<TopLeftBar numberOfOnlineUsers={numberOfOnlineUsers} />
+
 					<div
 						style={{ flex: 10, overflow: "auto" }}
 						id="usersSection"

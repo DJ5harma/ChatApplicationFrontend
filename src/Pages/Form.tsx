@@ -12,7 +12,8 @@ export default function Form({ wss }: { wss: WebSocket }) {
 	});
 	const [confirmPassword, setConfirmPassword] = useState("");
 
-	const { setLoggedIn, setUsername, setId } = useContext(UserContext);
+	const { setLoggedIn, setUsername, setId, setLoading } =
+		useContext(UserContext);
 
 	async function handleForm() {
 		if (pageType === "Register") {
@@ -25,9 +26,9 @@ export default function Form({ wss }: { wss: WebSocket }) {
 				return;
 			}
 		}
+		setLoading(true);
 
 		const { data } = await axios.post(`/auth/${pageType}`, user);
-		console.log(data);
 		if (data.error) toast.error(data.error);
 		else {
 			localStorage.setItem("token", data.token);
@@ -39,13 +40,17 @@ export default function Form({ wss }: { wss: WebSocket }) {
 			setUsername(data.username);
 			setId(data._id);
 			setLoggedIn(true);
+			setLoading(false);
 			toast.success(data.message);
 		}
 	}
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
-		if (!token) return;
+		if (!token) {
+			return;
+		}
+		setLoading(true);
 
 		(async () => {
 			const { data } = await axios.post("/auth/Wall", {
@@ -60,6 +65,7 @@ export default function Form({ wss }: { wss: WebSocket }) {
 			setUsername(data.username);
 			setId(data._id);
 			setLoggedIn(true);
+			setLoading(false);
 			toast.success(data.message);
 		})();
 	}, []);

@@ -21,23 +21,4 @@
 		cursor: pointer;
 		color: rgb(178, 213, 243);
 	}
-
-	input {
-		border: solid rgb(109, 119, 255);
-		color: rgb(255, 255, 255);
-		padding: 16px 14px 10px;
-		font-size: larger;
-
-		background-color: black;
-		border-radius: 10px;
-	}
-	button {
-		padding: 10px 20px;
-		font-size: larger;
-		background-color: rgb(97, 139, 255);
-		color: black;
-		border: none;
-		border-radius: 20px;
-		cursor: pointer;
-	}
 }
