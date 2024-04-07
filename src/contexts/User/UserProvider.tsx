@@ -1,5 +1,4 @@
-import axios from "axios";
-import { ReactNode, createContext, useEffect, useState } from "react";
+import { ReactNode, createContext, useState } from "react";
 import { UserContextType } from "../../Utilities/DataTypes";
 
 export const UserContext = createContext<UserContextType>({
@@ -17,33 +16,7 @@ export default function UserProvider({ children }: { children: ReactNode }) {
 	const [username, setUsername] = useState("");
 	const [_id, setId] = useState("");
 	const [loggedIn, setLoggedIn] = useState(false);
-	const [loading, setLoading] = useState(true);
-
-	useEffect(() => {
-		const token = localStorage.getItem("token");
-		if (!token){ 
-     setLoading(false);
-     return;
-		}
-		setLoading(true);
-
-		(async () => {
-			const { data } = await axios.post("/auth/Wall", {
-				token,
-				autoLogin: true,
-			});
-			wss.send(
-				JSON.stringify({
-					token: localStorage.getItem("token"),
-				})
-			);
-			setUsername(data.username);
-			setId(data._id);
-			setLoggedIn(true);
-			setLoading(false);
-			toast.success(data.message);
-		})();
-	}, []);
+	const [loading, setLoading] = useState(false);
 
 	return (
 		<UserContext.Provider
