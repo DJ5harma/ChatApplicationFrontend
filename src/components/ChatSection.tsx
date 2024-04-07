@@ -48,6 +48,8 @@ export default function ChatSection() {
 								margin: 5,
 								border: "solid",
 								borderRadius: 20,
+								maxWidth: "30vw",
+								wordWrap: "break-word",
 								backgroundColor:
 									_id === message.senderId
 										? "rgb(0,0,60)"
