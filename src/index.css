@@ -19,6 +19,10 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgb(0, 0, 0, 0.2)),
+		url("bgImage2.jpg");
+	background-size: cover;
 }
 :root {
 	/* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */

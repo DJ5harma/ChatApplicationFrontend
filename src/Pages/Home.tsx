@@ -18,7 +18,6 @@ export default function Home({ wss }: { wss: WebSocket }) {
 	const { username } = useContext(UserContext);
 
 	useEffect(() => {
-		// const wss = new WebSocket(WEB_SOCKET_URL);
 		wss.addEventListener("message", ({ data }: { data: string }) => {
 			DataHandlerWS({
 				data,
@@ -33,10 +32,10 @@ export default function Home({ wss }: { wss: WebSocket }) {
 	return (
 		<div id="home">
 			<MessageProvider wss={wss}>
-				<div style={{ flex: 1 }} id="leftSection">
-					<div style={{ flex: 1, textAlign: "center" }}>
+				<div id="leftSection">
+					<p style={{ flex: 1, textAlign: "center" }}>
 						user: {username}
-					</div>
+					</p>
 					<h3 style={{ textAlign: "center" }}>
 						OnlineUsers: {numberOfOnlineUsers}
 					</h3>
@@ -58,7 +57,7 @@ export default function Home({ wss }: { wss: WebSocket }) {
 				</div>
 				<div id="rightSection">
 					<TopRightBar />
-					{wss && <ChatSection />}
+					<ChatSection />
 					<InputSection wss={wss} />
 				</div>
 			</MessageProvider>

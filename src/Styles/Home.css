@@ -2,8 +2,10 @@
 	width: 100vw;
 	height: 100vh;
 	display: flex;
+	padding-top: 10px;
 
 	#leftSection {
+		flex: 1;
 		display: flex;
 		border-right: solid;
 		flex-direction: column;
@@ -11,7 +13,7 @@
 		font-size: 20px;
 		div {
 			width: 100%;
-			border-top: solid;
+			/* border-top: solid; */
 		}
 		#usersSection {
 			padding: 0 10px;
@@ -38,6 +40,7 @@
 		}
 	}
 	#rightSection {
+		padding-top: 5px;
 		flex: 2;
 		display: flex;
 		flex-direction: column;

@@ -2,14 +2,20 @@ import { useContext } from "react";
 
 import { UserContext } from "../contexts/User/UserProvider";
 import MessageContext from "../contexts/Messages/MessageContext";
+import WelcomeScreen from "./WelcomeScreen";
 
 export default function ChatSection() {
 	const { messages, selectedUser } = useContext(MessageContext);
 
 	const { _id } = useContext(UserContext);
+	if (selectedUser._id === "null") {
+		return <WelcomeScreen />;
+	}
 
 	return (
-		<div style={{ flex: 8, border: "solid", overflow: "auto" }}>
+		<div
+			style={{ padding: 10, flex: 8, border: "solid", overflow: "auto" }}
+		>
 			{messages
 				.filter((message) => {
 					return (
@@ -34,6 +40,10 @@ export default function ChatSection() {
 								margin: 5,
 								border: "solid",
 								borderRadius: 20,
+								backgroundColor:
+									_id === message.senderId
+										? "rgb(0,0,60)"
+										: "black",
 							}}
 						>
 							{message.content}
