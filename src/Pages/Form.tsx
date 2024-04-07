@@ -29,20 +29,22 @@ export default function Form({ wss }: { wss: WebSocket }) {
 		setLoading(true);
 
 		const { data } = await axios.post(`/auth/${pageType}`, user);
-		if (data.error) toast.error(data.error);
-		else {
-			localStorage.setItem("token", data.token);
-			wss.send(
-				JSON.stringify({
-					token: localStorage.getItem("token"),
-				})
-			);
-			setUsername(data.username);
-			setId(data._id);
-			setLoggedIn(true);
+		if (data.error) {
+			toast.error(data.error);
 			setLoading(false);
-			toast.success(data.message);
+			return;
 		}
+		localStorage.setItem("token", data.token);
+		wss.send(
+			JSON.stringify({
+				token: localStorage.getItem("token"),
+			})
+		);
+		setUsername(data.username);
+		setId(data._id);
+		setLoggedIn(true);
+		setLoading(false);
+		toast.success(data.message);
 	}
 
 	useEffect(() => {
