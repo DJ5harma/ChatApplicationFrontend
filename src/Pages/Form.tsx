@@ -47,6 +47,31 @@ export default function Form({ wss }: { wss: WebSocket }) {
 		toast.success(data.message);
 	}
 
+ useEffect(() => {
+  setLoading(true);
+		const token = localStorage.getItem("token");
+		if (!token){ 
+     setLoading(false);
+     return;
+		}
+		(async () => {
+			const { data } = await axios.post("/auth/Wall", {
+				token,
+				autoLogin: true,
+			});
+			wss.send(
+				JSON.stringify({
+					token: localStorage.getItem("token"),
+				})
+			);
+			setUsername(data.username);
+			setId(data._id);
+			setLoggedIn(true);
+			setLoading(false);
+			toast.success(data.message);
+		})();
+	}, []);
+
 	return (
 		<div id="form">
 			<h1>ChatApp</h1>
