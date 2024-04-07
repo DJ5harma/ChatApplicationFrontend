@@ -17,12 +17,14 @@ export default function UserProvider({ children }: { children: ReactNode }) {
 	const [username, setUsername] = useState("");
 	const [_id, setId] = useState("");
 	const [loggedIn, setLoggedIn] = useState(false);
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
-		if (!token) return;
-		
+		if (!token){ 
+     setLoading(false);
+     return;
+		}
 		setLoading(true);
 
 		(async () => {
