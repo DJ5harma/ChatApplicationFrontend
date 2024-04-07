@@ -19,6 +19,30 @@ export default function UserProvider({ children }: { children: ReactNode }) {
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [loading, setLoading] = useState(false);
 
+	useEffect(() => {
+		const token = localStorage.getItem("token");
+		if (!token) return;
+		
+		setLoading(true);
+
+		(async () => {
+			const { data } = await axios.post("/auth/Wall", {
+				token,
+				autoLogin: true,
+			});
+			wss.send(
+				JSON.stringify({
+					token: localStorage.getItem("token"),
+				})
+			);
+			setUsername(data.username);
+			setId(data._id);
+			setLoggedIn(true);
+			setLoading(false);
+			toast.success(data.message);
+		})();
+	}, []);
+
 	return (
 		<UserContext.Provider
 			value={{
