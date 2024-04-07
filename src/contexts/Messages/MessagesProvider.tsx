@@ -10,7 +10,7 @@ export default function MessageProvider({
 	wss,
 }: {
 	children: ReactNode;
-	wss: WebSocket | undefined;
+	wss: WebSocket;
 }) {
 	const [messages, setMessages] = useState<MessageType[]>([]);
 	const [selectedUser, setSelectedUser] = useState({
@@ -20,7 +20,9 @@ export default function MessageProvider({
 
 	useEffect(() => {
 		(async () => {
-			const { data } = await axios.get("/get/messages");
+			const { data } = await axios.post("/messages", {
+				token: localStorage.getItem("token"),
+			});
 			if (data.error) return;
 			messagesArray = data.messages;
 			setMessages(messagesArray);

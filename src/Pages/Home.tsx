@@ -7,21 +7,18 @@ import InputSection from "../components/InputSection";
 
 import DataHandlerWS from "../Utilities/DataHandlerWS";
 import { UserType } from "../Utilities/DataTypes";
-import { WEB_SOCKET_URL } from "../Utilities/HardCodedData";
 import ChatSection from "../components/ChatSection";
 import MessageProvider from "../contexts/Messages/MessagesProvider";
 import TopRightBar from "../components/TopRightBar";
 
-export default function Home() {
-	const [wss, setWss] = useState<WebSocket>();
+export default function Home({ wss }: { wss: WebSocket }) {
 	const [users, setUsers] = useState<UserType[]>([]);
 	const [onlineUsers, setOnlineUsers] = useState(new Set<string>());
 	const [numberOfOnlineUsers, setNumberOfOnlineUsers] = useState(1);
 	const { username } = useContext(UserContext);
 
 	useEffect(() => {
-		const wss = new WebSocket(WEB_SOCKET_URL);
-		setWss(wss);
+		// const wss = new WebSocket(WEB_SOCKET_URL);
 		wss.addEventListener("message", ({ data }: { data: string }) => {
 			DataHandlerWS({
 				data,
