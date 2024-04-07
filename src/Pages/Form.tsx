@@ -15,13 +15,15 @@ export default function Form({ wss }: { wss: WebSocket }) {
 	const { setLoggedIn, setUsername, setId } = useContext(UserContext);
 
 	async function handleForm() {
-		if (user.password !== confirmPassword && pageType === "Register") {
-			toast.error("Password and Confirm password fields must match!");
-			return;
-		}
-		if (user.password.length < 6) {
-			toast.error("Password must contain atleast 6 characters!");
-			return;
+		if (pageType === "Register") {
+			if (user.password !== confirmPassword) {
+				toast.error("Password and Confirm password fields must match!");
+				return;
+			}
+			if (user.password.length < 6) {
+				toast.error("Password must contain atleast 6 characters!");
+				return;
+			}
 		}
 
 		const { data } = await axios.post(`/auth/${pageType}`, user);
