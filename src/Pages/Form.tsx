@@ -15,6 +15,15 @@ export default function Form({ wss }: { wss: WebSocket }) {
 	const { setLoggedIn, setUsername, setId } = useContext(UserContext);
 
 	async function handleForm() {
+		if (user.password !== confirmPassword && pageType === "Register") {
+			toast.error("Password and Confirm password fields must match!");
+			return;
+		}
+		if (user.password.length < 6) {
+			toast.error("Password must contain atleast 6 characters!");
+			return;
+		}
+
 		const { data } = await axios.post(`/auth/${pageType}`, user);
 		console.log(data);
 		if (data.error) toast.error(data.error);
@@ -64,7 +73,9 @@ export default function Form({ wss }: { wss: WebSocket }) {
 			/>
 			<input
 				type="password"
-				placeholder="Password"
+				placeholder={`Password ${
+					pageType === "Register" && "(min. 6 chars)"
+				}`}
 				value={user.password}
 				onChange={(e) => setUser({ ...user, password: e.target.value })}
 			/>
