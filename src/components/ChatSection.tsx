@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 
 import { UserContext } from "../contexts/User/UserProvider";
 import MessageContext from "../contexts/Messages/MessageContext";
@@ -6,8 +6,15 @@ import WelcomeScreen from "./WelcomeScreen";
 
 export default function ChatSection() {
 	const { messages, selectedUser } = useContext(MessageContext);
-
 	const { _id } = useContext(UserContext);
+
+	const chatboxRef = useRef<HTMLDivElement>(null);
+	useEffect(() => {
+		if (chatboxRef.current) {
+			chatboxRef.current.scrollTop = chatboxRef.current.scrollHeight;
+		}
+	}, [messages.length, messages]);
+
 	if (selectedUser._id === "null") {
 		return <WelcomeScreen />;
 	}
@@ -15,6 +22,7 @@ export default function ChatSection() {
 	return (
 		<div
 			style={{ padding: 10, flex: 8, border: "solid", overflow: "auto" }}
+			ref={chatboxRef}
 		>
 			{messages
 				.filter((message) => {
