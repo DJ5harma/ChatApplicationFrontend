@@ -13,7 +13,7 @@ export default function ChatSection() {
 		if (chatboxRef.current) {
 			chatboxRef.current.scrollTop = chatboxRef.current.scrollHeight;
 		}
-	}, [messages.length, messages]);
+	}, [messages]);
 
 	if (selectedUser._id === "null") {
 		return <WelcomeScreen />;
