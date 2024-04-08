@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef } from "react";
 import { UserContext } from "../contexts/User/UserProvider";
 import WelcomeScreen from "./WelcomeScreen";
 import DataContext from "../contexts/Data/DataContext";
+import convertToHumanFriendlyDate from "../Utilities/convertToHumanFriendlyDate";
 
 export default function ChatSection() {
 	const { messages, selectedUser } = useContext(DataContext); // Accessing the messages from the DataContext for their display
@@ -39,9 +40,9 @@ export default function ChatSection() {
 									: "flex-start",
 						}}
 					>
-						<p
+						<div
 							style={{
-								padding: "10px 15px",
+								padding: 20,
 								margin: 5,
 								border: "solid",
 								borderRadius: 20,
@@ -53,8 +54,16 @@ export default function ChatSection() {
 										: "black",
 							}}
 						>
-							{message.content}
-						</p>
+							<p>{message.content}</p>
+							<span
+								style={{
+									color: "rgb(150,150,180)",
+									fontSize: 12,
+								}}
+							>
+								{convertToHumanFriendlyDate(message.createdAt)}
+							</span>
+						</div>
 					</div>
 				))}
 		</div>
