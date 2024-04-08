@@ -3,6 +3,7 @@ import "../Styles/Form.css";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { UserContext } from "../contexts/User/UserProvider";
+import Loading from "./Loading";
 
 export default function Form({ wss }: { wss: WebSocket }) {
 	const [pageType, setPageType] = useState("Login");
@@ -12,7 +13,7 @@ export default function Form({ wss }: { wss: WebSocket }) {
 	});
 	const [confirmPassword, setConfirmPassword] = useState("");
 
-	const { setLoggedIn, setUsername, setId, setLoading } =
+	const { loading, setLoggedIn, setUsername, setId, setLoading } =
 		useContext(UserContext);
 
 	async function handleForm() {
@@ -45,6 +46,9 @@ export default function Form({ wss }: { wss: WebSocket }) {
 		setLoggedIn(true);
 		setLoading(false);
 		toast.success(data.message);
+	}
+	if (loading) {
+		return <Loading />;
 	}
 
 	return (

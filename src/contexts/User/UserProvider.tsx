@@ -2,7 +2,6 @@ import { ReactNode, createContext, useEffect, useState } from "react";
 import { UserContextType } from "../../Utilities/DataTypes";
 import axios from "axios";
 import toast from "react-hot-toast";
-import Loading from "../../Pages/Loading";
 import Form from "../../Pages/Form";
 
 export const UserContext = createContext<UserContextType>({
@@ -34,7 +33,6 @@ export default function UserProvider({
 			setLoading(false);
 			return;
 		}
-
 		(async () => {
 			const { data } = await axios.post("/auth/Wall", {
 				token,
@@ -48,8 +46,8 @@ export default function UserProvider({
 			setUsername(data.username);
 			setId(data._id);
 			setLoggedIn(true);
-			setLoading(false);
 			toast.success(data.message);
+			setLoading(false);
 		})();
 	}, [wss]);
 
@@ -66,7 +64,7 @@ export default function UserProvider({
 				setLoading,
 			}}
 		>
-			{loading ? <Loading /> : !loggedIn ? <Form wss={wss} /> : children}
+			{loggedIn ? children : <Form wss={wss} />}
 		</UserContext.Provider>
 	);
 }

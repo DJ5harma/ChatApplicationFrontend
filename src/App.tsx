@@ -8,7 +8,6 @@ import UserProvider from "./contexts/User/UserProvider";
 
 import { API_URL, WEB_SOCKET_URL } from "./Utilities/HardCodedData";
 import DataProvider from "./contexts/Data/DataProvider";
-
 function App() {
 	const [wss, setWss] = useState<WebSocket>(); // defining a variable wss to store the websocket conection that we'll establish in the useEffect hook
 
@@ -20,12 +19,10 @@ function App() {
 	axios.defaults.baseURL = API_URL; // Telling axios to always refer requests with our HardCoded URL as prefix
 	// axios.defaults.withCredentials = true;
 
-	if (!wss) {
-		return <Loading />;
-	}
+	if (!wss) return <Loading />;
 
+	// if everything checks out, we'll render the
 	return (
-		// if everything checks out, we'll render the
 		<UserProvider wss={wss}>
 			<DataProvider wss={wss}>
 				<Home wss={wss} />
