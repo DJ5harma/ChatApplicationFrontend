@@ -17,6 +17,35 @@ export default function ChatSection() {
 
 	if (selectedUser._id === "null") return <WelcomeScreen />; // Show welcome screen if no user selected (which everybody shall see initially)
 
+	if (
+		messages.filter((message) => {
+			return (
+				message.senderId === selectedUser._id ||
+				message.receiverId === selectedUser._id
+			);
+		}).length === 0
+	) {
+		return (
+			<div
+				style={{
+					flex: 0.5,
+					display: "flex",
+					justifyContent: "center",
+					alignItems: "center",
+					fontSize: 30,
+					gap: 10,
+					backgroundColor: "rgba(0,0,0,0.7)",
+				}}
+			>
+				🤪 No messages exchanged with
+				<b style={{ color: "rgb(120,120,220)" }}>
+					{selectedUser.username}
+				</b>
+				yet... 🤪
+			</div>
+		);
+	}
+
 	return (
 		<div
 			style={{ padding: 10, flex: 8, overflow: "auto" }}
