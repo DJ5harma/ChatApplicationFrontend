@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import "../Styles/Form.css";
 import axios from "axios";
 import toast from "react-hot-toast";
+import "../Styles/Form.css";
 import { UserContext } from "../contexts/User/UserProvider";
 import Loading from "./Loading";
 
@@ -17,6 +17,7 @@ export default function Form({ wss }: { wss: WebSocket }) {
 		useContext(UserContext);
 
 	async function handleForm() {
+		// Will run on clicking the Login/Register button
 		if (pageType === "Register") {
 			if (user.password !== confirmPassword) {
 				toast.error("Password and Confirm password fields must match!");
@@ -27,31 +28,36 @@ export default function Form({ wss }: { wss: WebSocket }) {
 				return;
 			}
 		}
-		setLoading(true);
+		setLoading(true); // now loading page will be shown until we evaluate the response
 
-		const { data } = await axios.post(`/auth/${pageType}`, user);
+		const { data } = await axios.post(`/auth/${pageType}`, user); // making a post request to the server at login/register endpoint with the req.body as "user" itself
+
 		if (data.error) {
-			toast.error(data.error);
-			setLoading(false);
-			return;
+			// runs if the custom key error is received from the server in data object
+			toast.error(data.error); // user will be notified visually about failed login with custom error message defined in the server itself
+			setLoading(false); // now the Loading page will disappear
+			return; // getting out of this function
 		}
-		localStorage.setItem("token", data.token);
+
+		localStorage.setItem("token", data.token); // storing the token in localStorage for future auto-logging to be performed in the UserProvider.tsx file
 		wss.send(
 			JSON.stringify({
 				token: localStorage.getItem("token"),
 			})
-		);
-		setUsername(data.username);
-		setId(data._id);
-		setLoggedIn(true);
-		setLoading(false);
-		toast.success(data.message);
+		); // This will send the token to our websocket so that our wss function() on the server can verify our identity
+
+		setUsername(data.username); // updating the user's username in UserProvider.tsx
+		setId(data._id); // updating the user's _id in UserProvider.tsx
+		setLoggedIn(true); // now the Form page will disappear
+		setLoading(false); // now the Loading page will disappear
+		toast.success(data.message); // user will be notified visually about successful login
 	}
 	if (loading) {
 		return <Loading />;
-	}
+	} // it is basically showing the loading page until the auto-login is performed in the UserProvider.tsx file. That file will setLoading(true) and try auto-logging. "loading" will be true until an error/success message arrives, and then setLoading(false)
 
 	return (
+		// will run if "loading" === "false" and "loggedIn" === "false". loggedIn is also defined in UserProvider and will be changed there only according to the response from server when tried autoLogging
 		<div id="form">
 			<h1>ChatApp</h1>
 			<input
