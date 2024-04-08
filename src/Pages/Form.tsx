@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import "../Styles/Form.css";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -46,31 +46,6 @@ export default function Form({ wss }: { wss: WebSocket }) {
 		setLoading(false);
 		toast.success(data.message);
 	}
-
-	useEffect(() => {
-		const token = localStorage.getItem("token");
-		if (!token) {
-			return;
-		}
-		setLoading(true);
-
-		(async () => {
-			const { data } = await axios.post("/auth/Wall", {
-				token,
-				autoLogin: true,
-			});
-			wss.send(
-				JSON.stringify({
-					token: localStorage.getItem("token"),
-				})
-			);
-			setUsername(data.username);
-			setId(data._id);
-			setLoggedIn(true);
-			setLoading(false);
-			toast.success(data.message);
-		})();
-	}, []);
 
 	return (
 		<div id="form">

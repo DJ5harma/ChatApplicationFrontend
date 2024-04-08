@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { singleUserPropType } from "../Utilities/DataTypes";
-import MessageContext from "../contexts/Messages/MessageContext";
+import MessageContext from "../contexts/Data/DataContext";
 export default function SingleUser({
 	_id,
 	username,

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import MessageContext from "../contexts/Messages/MessageContext";
+import MessageContext from "../contexts/Data/DataContext";
 
 export default function TopRightBar() {
 	const { selectedUser } = useContext(MessageContext);

@@ -1,10 +1,11 @@
 import { createContext } from "react";
-import { MessageContextType } from "../../Utilities/DataTypes";
+import { DataContextType } from "../../Utilities/DataTypes";
 
-const MessageContext = createContext<MessageContextType>({
+const DataContext = createContext<DataContextType>({
+	users: [],
 	messages: [],
 	setMessages: () => {},
 	selectedUser: { _id: "null", username: "Nobody" },
 	setSelectedUser: () => {},
 });
-export default MessageContext;
+export default DataContext;

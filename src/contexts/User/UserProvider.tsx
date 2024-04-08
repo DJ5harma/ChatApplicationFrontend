@@ -1,7 +1,9 @@
-import axios from "axios";
 import { ReactNode, createContext, useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
 import { UserContextType } from "../../Utilities/DataTypes";
+import axios from "axios";
+import toast from "react-hot-toast";
+import Loading from "../../Pages/Loading";
+import Form from "../../Pages/Form";
 
 export const UserContext = createContext<UserContextType>({
 	username: "",
@@ -14,29 +16,49 @@ export const UserContext = createContext<UserContextType>({
 	setLoading: () => {},
 });
 
-export default function UserProvider({ children }: { children: ReactNode }) {
+export default function UserProvider({
+	children,
+	wss,
+}: {
+	children: ReactNode;
+	wss: WebSocket;
+}) {
 	const [username, setUsername] = useState("");
 	const [_id, setId] = useState("");
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [loading, setLoading] = useState(true);
-	const [cookies] = useCookies(["token"]);
 
 	useEffect(() => {
-		const { token } = cookies;
+		const token = localStorage.getItem("token");
+		if (!token) {
+			setLoading(false);
+			return;
+		}
 
-		if (!token) setLoading(false);
-		else
-			(async () => {
-				const { data } = await axios.post(`/auth/Wall`, {
-					autoLogin: true,
-				});
-				if (data.error) return;
-				setLoggedIn(true);
-				setUsername(data.username);
-				setId(data._id);
-				setLoading(false);
-			})();
-	}, []);
+		(async () => {
+			const { data } = await axios.post("/auth/Wall", {
+				token,
+				autoLogin: true,
+			});
+			wss.send(
+				JSON.stringify({
+					token: localStorage.getItem("token"),
+				})
+			);
+			setUsername(data.username);
+			setId(data._id);
+			setLoggedIn(true);
+			setLoading(false);
+			toast.success(data.message);
+		})();
+	}, [wss]);
+
+	if (loading) {
+		return <Loading />;
+	}
+	if (!loggedIn) {
+		return <Form wss={wss} />;
+	}
 
 	return (
 		<UserContext.Provider

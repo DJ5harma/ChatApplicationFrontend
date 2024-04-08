@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import MessageContext from "../contexts/Messages/MessageContext";
+import MessageContext from "../contexts/Data/DataContext";
 export default function InputSection({ wss }: { wss: WebSocket | undefined }) {
 	const [message, setMessage] = useState("");
 

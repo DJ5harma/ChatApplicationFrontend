@@ -1,16 +1,9 @@
+import "../Styles/Loading.css";
 export default function Loading() {
 	return (
-		<div
-			style={{
-				height: "100vh",
-				width: "100vw",
-				backgroundColor: "black",
-				display: "flex",
-				justifyContent: "center",
-				alignItems: "center",
-			}}
-		>
+		<div id="loading">
 			<h1>Loading...</h1>
+			<p>Please refresh if it takes too long</p>
 		</div>
 	);
 }
