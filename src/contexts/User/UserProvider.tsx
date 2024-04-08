@@ -26,7 +26,7 @@ export default function UserProvider({
 	const [username, setUsername] = useState("");
 	const [_id, setId] = useState("");
 	const [loggedIn, setLoggedIn] = useState(false);
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
@@ -53,13 +53,6 @@ export default function UserProvider({
 		})();
 	}, [wss]);
 
-	if (loading) {
-		return <Loading />;
-	}
-	if (!loggedIn) {
-		return <Form wss={wss} />;
-	}
-
 	return (
 		<UserContext.Provider
 			value={{
@@ -73,7 +66,7 @@ export default function UserProvider({
 				setLoading,
 			}}
 		>
-			{children}
+			{loading ? <Loading /> : !loggedIn ? <Form wss={wss} /> : children}
 		</UserContext.Provider>
 	);
 }

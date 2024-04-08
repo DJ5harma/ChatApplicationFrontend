@@ -20,8 +20,6 @@ function App() {
 	axios.defaults.baseURL = API_URL; // Telling axios to always refer requests with our HardCoded URL as prefix
 	// axios.defaults.withCredentials = true;
 
-	// if (!wss || loading) return <Loading />; // renders the Loading page if we have not made a wss connection, or if we set the loading variable state to true in some other component
-	// if (!loggedIn) return <Form wss={wss} />; // renders the Form page if user is not logged in
 	if (!wss) {
 		return <Loading />;
 	}
@@ -29,8 +27,6 @@ function App() {
 	return (
 		// if everything checks out, we'll render the
 		<UserProvider wss={wss}>
-			{/* {(!wss || loading) && <Loading />}
-			{!loggedIn && <Form wss={wss} />} */}
 			<DataProvider wss={wss}>
 				<Home wss={wss} />
 			</DataProvider>
