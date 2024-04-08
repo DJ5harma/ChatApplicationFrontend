@@ -26,7 +26,7 @@ export default function UserProvider({
 	const [username, setUsername] = useState("");
 	const [_id, setId] = useState("");
 	const [loggedIn, setLoggedIn] = useState(false);
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
