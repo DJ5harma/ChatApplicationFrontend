@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { singleUserPropType } from "../Utilities/DataTypes";
-import MessageContext from "../contexts/Data/DataContext";
+import DataContext from "../contexts/Data/DataContext";
 export default function SingleUser({
 	_id,
 	username,
 	onlineUsers,
 }: singleUserPropType) {
-	const { selectedUser, setSelectedUser } = useContext(MessageContext);
+	const { selectedUser, setSelectedUser } = useContext(DataContext);
 
 	return (
 		<div

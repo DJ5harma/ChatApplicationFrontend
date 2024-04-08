@@ -12,10 +12,11 @@ import ChatSection from "../components/ChatSection";
 import TopRightBar from "../components/TopRightBar";
 import TopLeftBar from "../components/TopLeftBar";
 import DataContext from "../contexts/Data/DataContext";
+import Loading from "./Loading";
 
 export default function Home({ wss }: { wss: WebSocket }) {
 	const { users } = useContext(DataContext); // Accessing the all the users from DataProvider.tsx
-	const { username } = useContext(UserContext); // Accessing the current user's username from UserProvider.tsx
+	const { username, loading } = useContext(UserContext); // Accessing the current user's username from UserProvider.tsx
 
 	const [onlineUsers, setOnlineUsers] = useState(new Set<string>()); // stores the number of online users which will be changed in realtime inside the DataHandlerWS.ts file. Set is used instead of array to prevent duplicate values
 	const [numberOfOnlineUsers, setNumberOfOnlineUsers] = useState(1); // will be changed in the DataHandlerWS as the online users change
@@ -37,18 +38,30 @@ export default function Home({ wss }: { wss: WebSocket }) {
 			<div id="leftSection">
 				<TopLeftBar numberOfOnlineUsers={numberOfOnlineUsers} />
 
-				<div style={{ flex: 10, overflow: "auto" }} id="usersSection">
-					{users
-						.filter((user) => username !== user.username)
-						.map(({ username, _id }) => (
-							<SingleUser
-								key={_id}
-								username={username}
-								_id={_id}
-								onlineUsers={onlineUsers}
-							/>
-						))}
-				</div>
+				{
+					<div
+						style={{ flex: 10, overflow: "auto" }}
+						id="usersSection"
+					>
+						{loading ? (
+							<>
+								<h3>Users</h3>
+								<Loading />
+							</>
+						) : (
+							users
+								.filter((user) => username !== user.username)
+								.map(({ username, _id }) => (
+									<SingleUser
+										key={_id}
+										username={username}
+										_id={_id}
+										onlineUsers={onlineUsers}
+									/>
+								))
+						)}
+					</div>
+				}
 			</div>
 			<div id="rightSection">
 				<TopRightBar />

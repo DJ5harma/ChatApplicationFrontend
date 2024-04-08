@@ -52,9 +52,7 @@ export default function Form({ wss }: { wss: WebSocket }) {
 		setLoading(false); // now the Loading page will disappear
 		toast.success(data.message); // user will be notified visually about successful login
 	}
-	if (loading) {
-		return <Loading />;
-	} // it is basically showing the loading page until the auto-login is performed in the UserProvider.tsx file. That file will setLoading(true) and try auto-logging. "loading" will be true until an error/success message arrives, and then setLoading(false)
+	if (loading) return <Loading />; // it is basically showing the loading page until the auto-login is performed in the UserProvider.tsx file. That file will setLoading(true) and try auto-logging. "loading" will be true until an error/success message arrives, and then setLoading(false)
 
 	return (
 		// will run if "loading" === "false" and "loggedIn" === "false". loggedIn is also defined in UserProvider and will be changed there only according to the response from server when tried autoLogging

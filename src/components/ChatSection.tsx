@@ -1,23 +1,20 @@
 import { useContext, useEffect, useRef } from "react";
-
 import { UserContext } from "../contexts/User/UserProvider";
-import MessageContext from "../contexts/Data/DataContext";
 import WelcomeScreen from "./WelcomeScreen";
+import DataContext from "../contexts/Data/DataContext";
 
 export default function ChatSection() {
-	const { messages, selectedUser } = useContext(MessageContext);
+	const { messages, selectedUser } = useContext(DataContext); // Accessing the messages from the DataContext for their display
 	const { _id } = useContext(UserContext);
 
 	const chatboxRef = useRef<HTMLDivElement>(null);
 	useEffect(() => {
 		if (chatboxRef.current) {
-			chatboxRef.current.scrollTop = chatboxRef.current.scrollHeight;
+			chatboxRef.current.scrollTop = chatboxRef.current.scrollHeight; // scrolls the chatBox down
 		}
-	}, [messages, selectedUser]);
+	}, [messages, selectedUser]); // runs whenever a receiver is selected or a new message arrives (will change the dependencies in the future as deleting the messages would also trigger this)
 
-	if (selectedUser._id === "null") {
-		return <WelcomeScreen />;
-	}
+	if (selectedUser._id === "null") return <WelcomeScreen />; // Show welcome screen if no user selected (which everybody shall see initially)
 
 	return (
 		<div

@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
-import MessageContext from "../contexts/Data/DataContext";
-export default function InputSection({ wss }: { wss: WebSocket | undefined }) {
+import DataContext from "../contexts/Data/DataContext";
+export default function InputSection({ wss }: { wss: WebSocket }) {
 	const [message, setMessage] = useState("");
 
-	const { selectedUser } = useContext(MessageContext);
+	const { selectedUser } = useContext(DataContext); // Accessing the selectedUser from DataProvider.tsx
 
 	if (selectedUser._id === "null") {
 		return (
@@ -21,14 +21,13 @@ export default function InputSection({ wss }: { wss: WebSocket | undefined }) {
 			/>
 			<button
 				onClick={() => {
-					wss &&
-						wss.send(
-							JSON.stringify({
-								type: "sendMessage",
-								content: message,
-								receiverId: selectedUser._id,
-							})
-						);
+					wss.send(
+						JSON.stringify({
+							type: "sendMessage",
+							content: message,
+							receiverId: selectedUser._id,
+						})
+					); // Sending the message to our socket
 					setMessage("");
 				}}
 			>

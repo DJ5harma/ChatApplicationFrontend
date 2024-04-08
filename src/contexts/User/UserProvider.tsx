@@ -44,11 +44,12 @@ export default function UserProvider({
 				})
 			); // Now we're sending our token to the socket. The socket will only operate if the token is sent and the credentials verify well. Otherwise, the connection will be revoked (see backend files for detail)
 
-			setUsername(data.username);
-			setId(data._id);
-			setLoggedIn(true);
-			toast.success(data.message);
-			setLoading(false);
+			//
+			setUsername(data.username); // updating the user's username in UserProvider.tsx
+			setId(data._id); // updating the user's _id in UserProvider.tsx
+			setLoggedIn(true); // now the Form page will disappear
+			setLoading(false); // now the Loading page will disappear
+			toast.success(data.message); // user will be notified visually about successful login
 		})();
 	}, [wss]);
 
@@ -68,4 +69,5 @@ export default function UserProvider({
 			{loggedIn ? children : <Form wss={wss} />}
 		</UserContext.Provider>
 	);
+	// will render the Form Page if not logged in, otherwise the children will be rendered
 }
