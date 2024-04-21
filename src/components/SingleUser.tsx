@@ -1,12 +1,32 @@
 import { useContext } from "react";
 import { singleUserPropType } from "../Utilities/DataTypes";
 import DataContext from "../contexts/Data/DataContext";
+import { UserContext } from "../contexts/User/UserProvider";
 export default function SingleUser({
 	_id,
 	username,
 	onlineUsers,
 }: singleUserPropType) {
-	const { selectedUser, setSelectedUser } = useContext(DataContext);
+	const { selectedUser, setSelectedUser, messages } = useContext(DataContext);
+
+	const userInfo = useContext(UserContext);
+
+	const latestMessage = () => {
+		for (let i = messages.length - 1; i >= 0; --i) {
+			if (
+				(messages[i].receiverId === _id &&
+					messages[i].senderId === userInfo._id) ||
+				(messages[i].receiverId === userInfo._id &&
+					messages[i].senderId === _id)
+			) {
+				const value = messages[i].content.slice(0, 30);
+				return `${value}${
+					messages[i].content.length > 30 ? "..." : ""
+				}`;
+			}
+		}
+		return "";
+	};
 
 	return (
 		<div
@@ -20,10 +40,20 @@ export default function SingleUser({
 			}}
 		>
 			<span className="namePic">{username[0]}</span>
-			<span>
-				{username}
-				{onlineUsers.has(username) ? ` 👽` : ` 💤`}
-			</span>
+			<div>
+				<span>
+					{username}
+					{onlineUsers.has(username) ? ` 👽` : ` 💤`}
+				</span>
+				<p
+					style={{
+						fontSize: 12,
+						color: "rgb(200,200,200)",
+					}}
+				>
+					{latestMessage()}
+				</p>
+			</div>
 		</div>
 	);
 }

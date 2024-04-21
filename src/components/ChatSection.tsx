@@ -17,14 +17,14 @@ export default function ChatSection() {
 
 	if (selectedUser._id === "null") return <WelcomeScreen />; // Show welcome screen if no user selected (which everybody shall see initially)
 
-	if (
-		messages.filter((message) => {
-			return (
-				message.senderId === selectedUser._id ||
-				message.receiverId === selectedUser._id
-			);
-		}).length === 0
-	) {
+	const chatBoxMessages = messages.filter((message) => {
+		return (
+			message.senderId === selectedUser._id ||
+			message.receiverId === selectedUser._id
+		);
+	});
+
+	if (chatBoxMessages.length === 0) {
 		return (
 			<div
 				style={{
@@ -51,58 +51,51 @@ export default function ChatSection() {
 			style={{ padding: 10, flex: 8, overflow: "auto" }}
 			ref={chatboxRef}
 		>
-			{messages
-				.filter((message) => {
-					return (
-						message.senderId === selectedUser._id ||
-						message.receiverId === selectedUser._id
-					);
-				})
-				.map((message) => (
+			{chatBoxMessages.map((message) => (
+				<div
+					key={message._id}
+					style={{
+						display: "flex",
+						justifyContent:
+							_id === message.senderId
+								? "flex-end"
+								: "flex-start",
+					}}
+				>
 					<div
-						key={message._id}
 						style={{
-							display: "flex",
-							justifyContent:
+							padding: 20,
+							margin: 5,
+							border: "solid",
+							borderRadius: 20,
+							maxWidth: "30vw",
+							wordWrap: "break-word",
+							backgroundColor:
 								_id === message.senderId
-									? "flex-end"
-									: "flex-start",
+									? "rgb(0,0,60)"
+									: "black",
 						}}
 					>
-						<div
-							style={{
-								padding: 20,
-								margin: 5,
-								border: "solid",
-								borderRadius: 20,
-								maxWidth: "30vw",
-								wordWrap: "break-word",
-								backgroundColor:
-									_id === message.senderId
-										? "rgb(0,0,60)"
-										: "black",
-							}}
-						>
-							<p>{message.content}</p>
-							{(() => {
-								let date = convertToHumanFriendlyDate(
-									message.createdAt
-								);
-								if (date === "Invalid Date") date = "Now";
-								return (
-									<p
-										style={{
-											color: "rgb(150,150,180)",
-											fontSize: 12,
-										}}
-									>
-										{date}
-									</p>
-								);
-							})()}
-						</div>
+						<p>{message.content}</p>
+						{(() => {
+							let date = convertToHumanFriendlyDate(
+								message.createdAt
+							);
+							if (date === "Invalid Date") date = "Now";
+							return (
+								<p
+									style={{
+										color: "rgb(150,150,180)",
+										fontSize: 12,
+									}}
+								>
+									{date}
+								</p>
+							);
+						})()}
 					</div>
-				))}
+				</div>
+			))}
 		</div>
 	);
 }
