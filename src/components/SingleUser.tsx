@@ -33,7 +33,7 @@ export default function SingleUser({
 			onClick={() => setSelectedUser(thisSingleUser)}
 			style={{
 				backgroundColor:
-					_id !== selectedUser._id
+					thisSingleUser._id !== selectedUser._id
 						? `rgb(20,20,50)`
 						: `rgb(100,100,200)`,
 			}}
