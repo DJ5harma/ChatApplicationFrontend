@@ -1,0 +1,8 @@
+.singleMessageInternal {
+	padding: 20px;
+	margin: 5px;
+	border: solid;
+	border-radius: 20px;
+	max-width: 30vw;
+	word-wrap: "break-word";
+}

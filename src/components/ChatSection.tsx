@@ -4,6 +4,8 @@ import WelcomeScreen from "./WelcomeScreen";
 import DataContext from "../contexts/Data/DataContext";
 import convertToHumanFriendlyDate from "../Utilities/convertToHumanFriendlyDate";
 
+import "../Styles/ChatSection.css";
+
 export default function ChatSection() {
 	const { messages, selectedUser } = useContext(DataContext); // Accessing the messages from the DataContext for their display
 	const { _id } = useContext(UserContext);
@@ -60,16 +62,12 @@ export default function ChatSection() {
 							_id === message.senderId
 								? "flex-end"
 								: "flex-start",
+						animation: "fadeOut forwards 0.1s",
 					}}
 				>
 					<div
+						className="singleMessageInternal"
 						style={{
-							padding: 20,
-							margin: 5,
-							border: "solid",
-							borderRadius: 20,
-							maxWidth: "30vw",
-							wordWrap: "break-word",
 							backgroundColor:
 								_id === message.senderId
 									? "rgb(0,0,60)"

@@ -3,8 +3,10 @@ import { UserContext } from "../contexts/User/UserProvider";
 
 export default function TopLeftBar({
 	numberOfOnlineUsers,
+	wss,
 }: {
 	numberOfOnlineUsers: number;
+	wss: WebSocket;
 }) {
 	const { username, setLoggedIn } = useContext(UserContext);
 	return (
@@ -40,6 +42,12 @@ export default function TopLeftBar({
 			<button
 				onClick={() => {
 					localStorage.removeItem("token");
+					wss.send(
+						JSON.stringify({
+							type: "userOffline",
+							offlineUserUsername: username,
+						})
+					); // Sending the message to our socket
 					setLoggedIn(false);
 				}}
 				style={{ fontSize: "18px" }}

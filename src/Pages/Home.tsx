@@ -36,7 +36,10 @@ export default function Home({ wss }: { wss: WebSocket }) {
 	return (
 		<div id="home">
 			<div id="leftSection">
-				<TopLeftBar numberOfOnlineUsers={numberOfOnlineUsers} />
+				<TopLeftBar
+					numberOfOnlineUsers={numberOfOnlineUsers}
+					wss={wss}
+				/>
 
 				{
 					<div
