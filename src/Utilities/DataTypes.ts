@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction } from "react";
 export interface UserType {
 	username: string;
 	_id: string;
+	createdAt: string;
 }
 export interface DataHandlerWSType {
 	data: string;
@@ -14,8 +15,7 @@ export interface DataHandlerWSType {
 } // This is for the parameters of our DataHandlerWS function() which accepts messages from our webSocket server present in the backend and manipulates the client-side data
 
 export interface singleUserPropType {
-	_id: string;
-	username: string;
+	thisSingleUser: UserType;
 	onlineUsers: Set<string>;
 } // This is for the component SingleUser.tsx
 

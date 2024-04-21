@@ -3,21 +3,20 @@ import { singleUserPropType } from "../Utilities/DataTypes";
 import DataContext from "../contexts/Data/DataContext";
 import { UserContext } from "../contexts/User/UserProvider";
 export default function SingleUser({
-	_id,
-	username,
+	thisSingleUser,
 	onlineUsers,
 }: singleUserPropType) {
 	const { selectedUser, setSelectedUser, messages } = useContext(DataContext);
 
-	const userInfo = useContext(UserContext);
+	const { _id } = useContext(UserContext);
 
 	const latestMessage = () => {
 		for (let i = messages.length - 1; i >= 0; --i) {
 			if (
+				(messages[i].receiverId === thisSingleUser._id &&
+					messages[i].senderId === _id) ||
 				(messages[i].receiverId === _id &&
-					messages[i].senderId === userInfo._id) ||
-				(messages[i].receiverId === userInfo._id &&
-					messages[i].senderId === _id)
+					messages[i].senderId === thisSingleUser._id)
 			) {
 				const value = messages[i].content.slice(0, 30);
 				return `${value}${
@@ -31,7 +30,7 @@ export default function SingleUser({
 	return (
 		<div
 			className="singleUser"
-			onClick={() => setSelectedUser({ username, _id })}
+			onClick={() => setSelectedUser(thisSingleUser)}
 			style={{
 				backgroundColor:
 					_id !== selectedUser._id
@@ -39,11 +38,11 @@ export default function SingleUser({
 						: `rgb(100,100,200)`,
 			}}
 		>
-			<span className="namePic">{username[0]}</span>
+			<span className="namePic">{thisSingleUser.username[0]}</span>
 			<div>
 				<span>
-					{username}
-					{onlineUsers.has(username) ? ` 👽` : ` 💤`}
+					{thisSingleUser.username}
+					{onlineUsers.has(thisSingleUser.username) ? ` 👽` : ` 💤`}
 				</span>
 				<p
 					style={{

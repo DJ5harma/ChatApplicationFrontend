@@ -20,6 +20,7 @@ export default function DataProvider({
 	const [selectedUser, setSelectedUser] = useState({
 		username: "Nobody",
 		_id: "null",
+		createdAt: "",
 	}); // for keeping track of the user that the current user is chatting with
 
 	const { setLoading } = useContext(UserContext); // accessing this form UserProvider in order to
