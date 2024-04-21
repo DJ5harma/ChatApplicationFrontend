@@ -21,7 +21,7 @@ export default function InputSection({ wss }: { wss: WebSocket }) {
 			/>
 			<button
 				onClick={() => {
-     if(message==="") return;
+					if (message === "") return;
 					wss.send(
 						JSON.stringify({
 							type: "sendMessage",

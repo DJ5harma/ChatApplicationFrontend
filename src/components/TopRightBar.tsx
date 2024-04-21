@@ -5,8 +5,6 @@ import convertToHumanFriendlyDate from "../Utilities/convertToHumanFriendlyDate"
 export default function TopRightBar() {
 	const { selectedUser } = useContext(MessageContext);
 
-	console.log(selectedUser);
-
 	return (
 		<div
 			style={{

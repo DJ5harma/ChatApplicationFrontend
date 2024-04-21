@@ -33,8 +33,6 @@ export default function Home({ wss }: { wss: WebSocket }) {
 		}); // This will be constantly listening to our socket for any realtime messages
 	}, []);
 
-	console.log(users);
-
 	return (
 		<div id="home">
 			<div id="leftSection">
@@ -54,8 +52,6 @@ export default function Home({ wss }: { wss: WebSocket }) {
 							users
 								.filter((user) => username !== user.username)
 								.map((user) => {
-									console.log(user);
-
 									return (
 										<SingleUser
 											key={user._id}
@@ -63,7 +59,6 @@ export default function Home({ wss }: { wss: WebSocket }) {
 											onlineUsers={onlineUsers}
 										/>
 									);
-									return <p></p>;
 								})
 						)}
 					</div>
