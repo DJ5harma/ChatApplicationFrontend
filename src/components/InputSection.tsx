@@ -36,7 +36,7 @@ export default function InputSection({ wss }: { wss: WebSocket }) {
 	}
 
 	return (
-		<div id="inputSection">
+		<div id="inputSection" ref={inputSectionRef}>
 			<input
 				placeholder="Enter your message"
 				value={message}
