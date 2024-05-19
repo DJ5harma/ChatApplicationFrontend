@@ -1,9 +1,31 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import DataContext from "../contexts/Data/DataContext";
 export default function InputSection({ wss }: { wss: WebSocket }) {
 	const [message, setMessage] = useState("");
 
 	const { selectedUser } = useContext(DataContext); // Accessing the selectedUser from DataProvider.tsx
+
+	const inputSectionRef = useRef<HTMLDivElement | null>(null);
+
+	useEffect(() => {
+		const setFooterPosition = () => {
+			if (inputSectionRef.current) {
+				inputSectionRef.current.style.bottom = "0";
+			}
+		};
+
+		window.addEventListener("resize", setFooterPosition);
+		window.addEventListener("scroll", setFooterPosition);
+		window.addEventListener("orientationchange", setFooterPosition);
+
+		setFooterPosition();
+
+		return () => {
+			window.removeEventListener("resize", setFooterPosition);
+			window.removeEventListener("scroll", setFooterPosition);
+			window.removeEventListener("orientationchange", setFooterPosition);
+		};
+	}, []); // Mobile browser toolbars hide the inputSection. This will fix that (hopefully)
 
 	if (selectedUser._id === "null") {
 		return (
@@ -12,6 +34,7 @@ export default function InputSection({ wss }: { wss: WebSocket }) {
 			</div>
 		);
 	}
+
 	return (
 		<div id="inputSection">
 			<input
