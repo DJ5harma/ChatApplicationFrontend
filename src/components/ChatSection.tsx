@@ -75,6 +75,7 @@ export default function ChatSection() {
 									: "black",
 							maxWidth: isMobile ? "90vw" : "30vw",
 							wordWrap: "break-word",
+							marginRight: isMobile ? 12 : "default",
 						}}
 					>
 						<p>{message.content}</p>
