@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { UserContext } from "../contexts/User/UserProvider";
+import { isMobile } from "react-device-detect";
 
 export default function TopLeftBar({
 	numberOfOnlineUsers,
@@ -27,7 +28,7 @@ export default function TopLeftBar({
 					borderRadius: 20,
 				}}
 			>
-				user:{" "}
+				{!isMobile && "user: "}
 				<span
 					style={{
 						color: "rgb(160,160,255)",
@@ -37,7 +38,7 @@ export default function TopLeftBar({
 				</span>
 			</p>
 			<span style={{ textAlign: "center" }}>
-				| othersOnline: {numberOfOnlineUsers - 1}
+				{!isMobile && "|"}othersOnline: {numberOfOnlineUsers - 1}
 			</span>
 			<button
 				onClick={() => {

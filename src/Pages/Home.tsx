@@ -13,10 +13,11 @@ import TopRightBar from "../components/TopRightBar";
 import TopLeftBar from "../components/TopLeftBar";
 import DataContext from "../contexts/Data/DataContext";
 import Loading from "./Loading";
+import { isMobile } from "react-device-detect";
 
 export default function Home({ wss }: { wss: WebSocket }) {
 	const { users } = useContext(DataContext); // Accessing the all the users from DataProvider.tsx
-	const { username, loading } = useContext(UserContext); // Accessing the current user's username from UserProvider.tsx
+	const { username, loading, selectionOnMobile } = useContext(UserContext); // Accessing the current user's username from UserProvider.tsx
 
 	const [onlineUsers, setOnlineUsers] = useState(new Set<string>()); // stores the number of online users which will be changed in realtime inside the DataHandlerWS.ts file. Set is used instead of array to prevent duplicate values
 	const [numberOfOnlineUsers, setNumberOfOnlineUsers] = useState(1); // will be changed in the DataHandlerWS as the online users change
@@ -33,45 +34,56 @@ export default function Home({ wss }: { wss: WebSocket }) {
 		}); // This will be constantly listening to our socket for any realtime messages
 	}, []);
 
+	const LeftSection = () => (
+		<div id="leftSection">
+			<TopLeftBar numberOfOnlineUsers={numberOfOnlineUsers} wss={wss} />
+
+			{
+				<div style={{ flex: 10, overflow: "auto" }} id="usersSection">
+					{loading ? (
+						<>
+							<h3>Users</h3>
+							<Loading />
+						</>
+					) : (
+						users
+							.filter((user) => username !== user.username)
+							.map((user) => {
+								return (
+									<SingleUser
+										key={user._id}
+										thisSingleUser={user}
+										onlineUsers={onlineUsers}
+									/>
+								);
+							})
+					)}
+				</div>
+			}
+		</div>
+	);
+
+	const RightSection = () => (
+		<div id="rightSection">
+			<TopRightBar />
+			<ChatSection />
+			<InputSection wss={wss} />
+		</div>
+	);
+
 	return (
 		<div id="home">
-			<div id="leftSection">
-				<TopLeftBar
-					numberOfOnlineUsers={numberOfOnlineUsers}
-					wss={wss}
-				/>
-
-				{
-					<div
-						style={{ flex: 10, overflow: "auto" }}
-						id="usersSection"
-					>
-						{loading ? (
-							<>
-								<h3>Users</h3>
-								<Loading />
-							</>
-						) : (
-							users
-								.filter((user) => username !== user.username)
-								.map((user) => {
-									return (
-										<SingleUser
-											key={user._id}
-											thisSingleUser={user}
-											onlineUsers={onlineUsers}
-										/>
-									);
-								})
-						)}
-					</div>
-				}
-			</div>
-			<div id="rightSection">
-				<TopRightBar />
-				<ChatSection />
-				<InputSection wss={wss} />
-			</div>
+			{(() => {
+				if (!isMobile)
+					return (
+						<>
+							<LeftSection />
+							<RightSection />
+						</>
+					);
+				if (selectionOnMobile) return <RightSection />;
+				return <LeftSection />;
+			})()}
 		</div>
 	);
 }

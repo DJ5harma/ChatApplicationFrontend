@@ -24,10 +24,12 @@ export interface UserContextType {
 	_id: string;
 	loggedIn: boolean;
 	loading: boolean;
+	selectionOnMobile: boolean;
 	setUsername: Dispatch<SetStateAction<string>>;
 	setId: Dispatch<SetStateAction<string>>;
 	setLoggedIn: Dispatch<SetStateAction<boolean>>;
 	setLoading: Dispatch<SetStateAction<boolean>>;
+	setSelectionOnMobile: Dispatch<SetStateAction<boolean>>;
 } // This is for the UserContext which stores all the needed information about the current user to pass it onto various components
 
 export interface MessageType {

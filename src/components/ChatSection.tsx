@@ -5,6 +5,7 @@ import DataContext from "../contexts/Data/DataContext";
 import convertToHumanFriendlyDate from "../Utilities/convertToHumanFriendlyDate";
 
 import "../Styles/ChatSection.css";
+import { isMobile } from "react-device-detect";
 
 export default function ChatSection() {
 	const { messages, selectedUser } = useContext(DataContext); // Accessing the messages from the DataContext for their display
@@ -72,6 +73,8 @@ export default function ChatSection() {
 								_id === message.senderId
 									? "rgb(0,0,60)"
 									: "black",
+							maxWidth: isMobile ? "90vw" : "30vw",
+							wordWrap: "break-word",
 						}}
 					>
 						<p>{message.content}</p>

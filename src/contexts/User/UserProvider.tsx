@@ -9,10 +9,12 @@ export const UserContext = createContext<UserContextType>({
 	_id: "",
 	loggedIn: false,
 	loading: true,
+	selectionOnMobile: false,
 	setUsername: () => {},
 	setId: () => {},
 	setLoggedIn: () => {},
 	setLoading: () => {},
+	setSelectionOnMobile: () => {},
 });
 
 export default function UserProvider({
@@ -26,6 +28,8 @@ export default function UserProvider({
 	const [_id, setId] = useState(""); // This user's _id (provided by MongoDB)
 	const [loggedIn, setLoggedIn] = useState(false); // this loggedIn status will be used to conditionally render the Form
 	const [loading, setLoading] = useState(true); // this loading status will be used to conditionally render the <Loading /> Page. Initially it is set to true so that auto-login can be tried while showing the user the loading page instead of the form
+
+	const [selectionOnMobile, setSelectionOnMobile] = useState(false);
 
 	useEffect(() => {
 		const token = localStorage.getItem("token"); // Acquired the token from the localStorage which was stored after previous login or registration success
@@ -60,10 +64,12 @@ export default function UserProvider({
 				_id,
 				loggedIn,
 				loading,
+				selectionOnMobile,
 				setUsername,
 				setId,
 				setLoggedIn,
 				setLoading,
+				setSelectionOnMobile,
 			}}
 		>
 			{loggedIn ? children : <Form wss={wss} />}

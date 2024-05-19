@@ -8,7 +8,7 @@ export default function SingleUser({
 }: singleUserPropType) {
 	const { selectedUser, setSelectedUser, messages } = useContext(DataContext);
 
-	const { _id } = useContext(UserContext);
+	const { _id, setSelectionOnMobile } = useContext(UserContext);
 
 	const latestMessage = () => {
 		for (let i = messages.length - 1; i >= 0; --i) {
@@ -30,7 +30,10 @@ export default function SingleUser({
 	return (
 		<div
 			className="singleUser"
-			onClick={() => setSelectedUser(thisSingleUser)}
+			onClick={() => {
+				setSelectedUser(thisSingleUser);
+				setSelectionOnMobile(true);
+			}}
 			style={{
 				backgroundColor:
 					thisSingleUser._id !== selectedUser._id

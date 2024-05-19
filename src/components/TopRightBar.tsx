@@ -1,9 +1,12 @@
 import { useContext } from "react";
-import MessageContext from "../contexts/Data/DataContext";
+import DataContext from "../contexts/Data/DataContext";
 import convertToHumanFriendlyDate from "../Utilities/convertToHumanFriendlyDate";
+import { isMobile } from "react-device-detect";
+import { UserContext } from "../contexts/User/UserProvider";
 
 export default function TopRightBar() {
-	const { selectedUser } = useContext(MessageContext);
+	const { selectedUser } = useContext(DataContext);
+	const { setSelectionOnMobile } = useContext(UserContext);
 
 	return (
 		<div
@@ -17,14 +20,33 @@ export default function TopRightBar() {
 				animation: "fadeOut 0.5s forwards",
 			}}
 		>
-			<h3>
-				Talking with:{" "}
-				<span style={{ color: "rgb(140,140,255)" }}>
-					{selectedUser.username}
+			<button
+				style={{
+					position: "fixed",
+					left: 10,
+				}}
+				onClick={() => setSelectionOnMobile(false)}
+			>
+				{"<"}
+			</button>
+			<h3
+				style={{
+					display: "flex",
+					flexDirection: isMobile ? "column" : "row",
+					alignItems: "center",
+				}}
+			>
+				<span>
+					Chatting with:{" "}
+					<span style={{ color: "rgb(140,140,255)" }}>
+						{selectedUser.username}
+					</span>
 				</span>
 				<span style={{ fontSize: 15, color: "rgb(150,150,150)" }}>
 					{selectedUser._id !== "null" &&
-						`, joined: ${convertToHumanFriendlyDate(
+						`${
+							isMobile ? " " : ", "
+						}joined: ${convertToHumanFriendlyDate(
 							selectedUser.createdAt
 						)}`}
 				</span>
