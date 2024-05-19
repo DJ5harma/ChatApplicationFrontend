@@ -4,8 +4,17 @@
 	flex-direction: column;
 	gap: 8;
 
+	#topRightBar {
+		/* flex: 1; */
+		height: 10vh;
+		display: "flex";
+		justify-content: "center";
+		align-items: "center";
+		background-color: black;
+		animation: "fadeOut 0.5s forwards";
+	}
 	#inputSection {
-		flex: 0.5;
+		height: 10vh;
 		padding: 10px;
 		display: flex;
 		justify-content: center;
@@ -22,13 +31,15 @@
 			font-size: 18px;
 		}
 	}
-
-	#topRightBar {
-		flex: 1;
-		display: "flex";
-		justify-content: "center";
-		align-items: "center";
-		background-color: black;
-		animation: "fadeOut 0.5s forwards";
+	#chatSection {
+		height: 80vh;
+		padding: 10px;
+		overflow: auto;
 	}
+}
+.singleMessageInternal {
+	padding: 20px;
+	margin: 5px;
+	border: solid;
+	border-radius: 20px;
 }

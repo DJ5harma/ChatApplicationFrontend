@@ -4,7 +4,6 @@ import WelcomeScreen from "./WelcomeScreen";
 import DataContext from "../contexts/Data/DataContext";
 import convertToHumanFriendlyDate from "../Utilities/convertToHumanFriendlyDate";
 
-import "../Styles/ChatSection.css";
 import { isMobile } from "react-device-detect";
 
 export default function ChatSection() {
@@ -50,10 +49,7 @@ export default function ChatSection() {
 	}
 
 	return (
-		<div
-			style={{ padding: 10, flex: 8, overflow: "auto" }}
-			ref={chatboxRef}
-		>
+		<div id="chatSection" ref={chatboxRef}>
 			{chatBoxMessages.map((message) => (
 				<div
 					key={message._id}
@@ -75,7 +71,6 @@ export default function ChatSection() {
 									: "black",
 							maxWidth: isMobile ? "90vw" : "30vw",
 							wordWrap: "break-word",
-							marginRight: isMobile ? 12 : "default",
 						}}
 					>
 						<p>{message.content}</p>

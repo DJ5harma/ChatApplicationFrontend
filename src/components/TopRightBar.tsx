@@ -15,6 +15,7 @@ export default function TopRightBar() {
 					style={{
 						position: "fixed",
 						left: 6,
+						top: 15,
 						borderRadius: 15,
 					}}
 					onClick={() => setSelectionOnMobile(false)}
@@ -27,6 +28,8 @@ export default function TopRightBar() {
 					display: "flex",
 					flexDirection: isMobile ? "column" : "row",
 					alignItems: "center",
+					justifyContent: "center",
+					height: "100%",
 				}}
 			>
 				<span>
