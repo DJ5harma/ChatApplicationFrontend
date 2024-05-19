@@ -20,16 +20,18 @@ export default function TopRightBar() {
 				animation: "fadeOut 0.5s forwards",
 			}}
 		>
-			<button
-				style={{
-					position: "fixed",
-					left: 6,
-					borderRadius: 15,
-				}}
-				onClick={() => setSelectionOnMobile(false)}
-			>
-				{"<"}
-			</button>
+			{isMobile && (
+				<button
+					style={{
+						position: "fixed",
+						left: 6,
+						borderRadius: 15,
+					}}
+					onClick={() => setSelectionOnMobile(false)}
+				>
+					{"<"}
+				</button>
+			)}
 			<h3
 				style={{
 					display: "flex",
