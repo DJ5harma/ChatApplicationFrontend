@@ -23,7 +23,8 @@ export default function TopRightBar() {
 			<button
 				style={{
 					position: "fixed",
-					left: 10,
+					left: 6,
+					borderRadius: 15,
 				}}
 				onClick={() => setSelectionOnMobile(false)}
 			>

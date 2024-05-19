@@ -18,6 +18,9 @@ export default function InputSection({ wss }: { wss: WebSocket }) {
 				placeholder="Enter your message"
 				value={message}
 				onChange={(e) => setMessage(e.target.value)}
+				style={{
+					width: "70%",
+				}}
 			/>
 			<button
 				onClick={() => {
