@@ -5,12 +5,14 @@
 	gap: 8;
 
 	#inputSection {
+		flex: 0.5;
 		padding: 10px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		background-color: rgb(0, 0, 0);
 		gap: 10px;
+
 		input {
 			padding: 12px 16px;
 			font-size: large;
@@ -19,5 +21,14 @@
 			padding: 12px;
 			font-size: 18px;
 		}
+	}
+
+	#topRightBar {
+		flex: 1;
+		display: "flex";
+		justify-content: "center";
+		align-items: "center";
+		background-color: black;
+		animation: "fadeOut 0.5s forwards";
 	}
 }

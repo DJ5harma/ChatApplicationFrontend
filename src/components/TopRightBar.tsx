@@ -9,17 +9,7 @@ export default function TopRightBar() {
 	const { setSelectionOnMobile } = useContext(UserContext);
 
 	return (
-		<div
-			id="TopRightBar"
-			style={{
-				flex: 1,
-				display: "flex",
-				justifyContent: "center",
-				alignItems: "center",
-				backgroundColor: "rgb(0,0,0)",
-				animation: "fadeOut 0.5s forwards",
-			}}
-		>
+		<div id="topRightBar">
 			{isMobile && (
 				<button
 					style={{
