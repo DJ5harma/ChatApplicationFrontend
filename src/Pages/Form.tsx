@@ -28,7 +28,7 @@ export default function Form({ wss }: { wss: WebSocket }) {
 				return;
 			}
 		}
-		setLoading(true); // now loading page will be shown until we evaluate the response
+		// setLoading(true); // now loading page will be shown until we evaluate the response
 
 		const { data } = await axios.post(`/auth/${pageType}`, user); // making a post request to the server at login/register endpoint with the req.body as "user" itself
 
