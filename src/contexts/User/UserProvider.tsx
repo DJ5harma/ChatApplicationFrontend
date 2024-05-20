@@ -8,7 +8,7 @@ export const UserContext = createContext<UserContextType>({
 	username: "",
 	_id: "",
 	loggedIn: false,
-	loading: false,
+	loading: true,
 	selectionOnMobile: false,
 	setUsername: () => {},
 	setId: () => {},
