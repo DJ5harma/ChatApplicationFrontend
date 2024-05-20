@@ -9,7 +9,6 @@ import DataProvider from "./contexts/Data/DataProvider";
 
 function App() {
 	const { VITE_WEBSOCKET_URL, VITE_HTTP_URL } = import.meta.env;
-
 	const [wss, setWss] = useState<WebSocket>(); // defining a variable wss to store the websocket conection that we'll establish in the useEffect hook
 
 	useEffect(() => {
