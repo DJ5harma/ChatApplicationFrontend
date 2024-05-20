@@ -58,6 +58,7 @@ export default function Form({ wss }: { wss: WebSocket }) {
 		// will run if "loading" === "false" and "loggedIn" === "false". loggedIn is also defined in UserProvider and will be changed there only according to the response from server when tried autoLogging
 		<div id="form">
 			<h1>ChatApp</h1>
+			<span>By Dhananjay</span>
 			<input
 				type="text"
 				placeholder="Username"
