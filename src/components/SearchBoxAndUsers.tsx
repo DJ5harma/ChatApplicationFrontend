@@ -2,9 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import DataContext from "../contexts/Data/DataContext";
 import SingleUser from "./SingleUser";
 import { UserType } from "../Utilities/DataTypes";
+import UserContext from "../contexts/User/UserContext";
 
 export default function SearchBoxAndUsers() {
 	const { users, onlineUsers, messages } = useContext(DataContext);
+
+	const { username } = useContext(UserContext);
 
 	const [query, setQuery] = useState("");
 
@@ -45,8 +48,12 @@ export default function SearchBoxAndUsers() {
 				/>
 			</div>
 			{newUsers
-				.filter(({ username }) =>
-					username.toLowerCase().includes(query.toLowerCase())
+				.filter(
+					(user) =>
+						user.username
+							.toLowerCase()
+							.includes(query.toLowerCase()) &&
+						user.username !== username
 				)
 				.map((user) => {
 					if (!found) setFound(true);
