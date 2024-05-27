@@ -1,11 +1,14 @@
 import { useContext } from "react";
-import { singleUserPropType } from "../Utilities/DataTypes";
+import { UserType } from "../Utilities/DataTypes";
 import DataContext from "../contexts/Data/DataContext";
-import { UserContext } from "../contexts/User/UserProvider";
+import UserContext from "../contexts/User/UserContext";
 export default function SingleUser({
 	thisSingleUser,
-	onlineUsers,
-}: singleUserPropType) {
+	isOnline,
+}: {
+	thisSingleUser: UserType;
+	isOnline: boolean;
+}) {
 	const { selectedUser, setSelectedUser, messages } = useContext(DataContext);
 
 	const { _id, setSelectionOnMobile } = useContext(UserContext);
@@ -45,7 +48,7 @@ export default function SingleUser({
 			<div>
 				<span>
 					{thisSingleUser.username}
-					{onlineUsers.has(thisSingleUser.username) ? ` 👽` : ` 💤`}
+					{isOnline ? ` 👽` : ` 💤`}
 				</span>
 				<p
 					style={{

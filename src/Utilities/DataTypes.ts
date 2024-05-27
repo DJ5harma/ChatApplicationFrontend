@@ -14,11 +14,6 @@ export interface DataHandlerWSType {
 	setNumberOfOnlineUsers: Dispatch<SetStateAction<number>>;
 } // This is for the parameters of our DataHandlerWS function() which accepts messages from our webSocket server present in the backend and manipulates the client-side data
 
-export interface singleUserPropType {
-	thisSingleUser: UserType;
-	onlineUsers: Set<string>;
-} // This is for the component SingleUser.tsx
-
 export interface UserContextType {
 	username: string;
 	_id: string;
@@ -44,7 +39,10 @@ export interface MessageType {
 export interface DataContextType {
 	users: UserType[];
 	messages: MessageType[];
-	setMessages: Dispatch<SetStateAction<MessageType[]>>;
 	selectedUser: UserType;
+	onlineUsers: Set<string>;
+	setMessages: Dispatch<SetStateAction<MessageType[]>>;
 	setSelectedUser: Dispatch<SetStateAction<UserType>>;
+	setUsers: Dispatch<SetStateAction<UserType[]>>;
+	setOnlineUsers: Dispatch<SetStateAction<Set<string>>>;
 } // This is for the MessageContext which stores all the needed information about the message receiving user that we've selected, and also all the messages in our app

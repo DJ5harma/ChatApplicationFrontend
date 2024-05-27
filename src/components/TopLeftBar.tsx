@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { UserContext } from "../contexts/User/UserProvider";
 import { isMobile } from "react-device-detect";
+import UserContext from "../contexts/User/UserContext";
 
 export default function TopLeftBar({
 	numberOfOnlineUsers,

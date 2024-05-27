@@ -2,8 +2,7 @@ import { MessageType, UserType } from "../../Utilities/DataTypes";
 import axios from "axios";
 import { ReactNode, useContext, useEffect, useState } from "react";
 import DataContext from "./DataContext";
-import { UserContext } from "../User/UserProvider";
-
+import UserContext from "../User/UserContext";
 // Made these two arrays because the setting of users and messages didn't happen as expected when tested directly (Probably something related to rerenders, will have to see). Using these fixed the issue
 let messagesArray: MessageType[] = [];
 let usersArray: UserType[] = [];
@@ -24,6 +23,8 @@ export default function DataProvider({
 	}); // for keeping track of the user that the current user is chatting with
 
 	const { setLoading } = useContext(UserContext); // accessing this form UserProvider in order to
+
+	const [onlineUsers, setOnlineUsers] = useState(new Set<string>()); // stores the number of online users which will be changed in realtime inside the DataHandlerWS.ts file. Set is used instead of array to prevent duplicate values
 
 	useEffect(() => {
 		setLoading(true);
@@ -60,9 +61,12 @@ export default function DataProvider({
 			value={{
 				users,
 				messages,
-				setMessages,
 				selectedUser,
+				onlineUsers,
+				setMessages,
 				setSelectedUser,
+				setUsers,
+				setOnlineUsers,
 			}}
 		>
 			{children}

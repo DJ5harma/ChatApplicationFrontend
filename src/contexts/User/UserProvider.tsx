@@ -1,21 +1,8 @@
-import { ReactNode, createContext, useEffect, useState } from "react";
-import { UserContextType } from "../../Utilities/DataTypes";
+import { ReactNode, useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Form from "../../Pages/Form";
-
-export const UserContext = createContext<UserContextType>({
-	username: "",
-	_id: "",
-	loggedIn: false,
-	loading: true,
-	selectionOnMobile: false,
-	setUsername: () => {},
-	setId: () => {},
-	setLoggedIn: () => {},
-	setLoading: () => {},
-	setSelectionOnMobile: () => {},
-});
+import UserContext from "./UserContext";
 
 export default function UserProvider({
 	children,

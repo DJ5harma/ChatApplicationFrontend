@@ -2,8 +2,7 @@ import { useContext } from "react";
 import DataContext from "../contexts/Data/DataContext";
 import convertToHumanFriendlyDate from "../Utilities/convertToHumanFriendlyDate";
 import { isMobile } from "react-device-detect";
-import { UserContext } from "../contexts/User/UserProvider";
-
+import UserContext from "../contexts/User/UserContext";
 export default function TopRightBar() {
 	const { selectedUser } = useContext(DataContext);
 	const { setSelectionOnMobile } = useContext(UserContext);

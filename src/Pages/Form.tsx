@@ -2,11 +2,11 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import "../Styles/Form.css";
-import { UserContext } from "../contexts/User/UserProvider";
 import Loading from "./Loading";
+import UserContext from "../contexts/User/UserContext";
 
 export default function Form({ wss }: { wss: WebSocket }) {
-	const [pageType, setPageType] = useState("Login");
+	const [pageType, setPageType] = useState("Register");
 	const [user, setUser] = useState({
 		username: "",
 		password: "",

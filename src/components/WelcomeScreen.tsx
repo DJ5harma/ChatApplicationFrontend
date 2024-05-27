@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { UserContext } from "../contexts/User/UserProvider";
+import UserContext from "../contexts/User/UserContext";
 
 export default function WelcomeScreen() {
 	const { username } = useContext(UserContext);

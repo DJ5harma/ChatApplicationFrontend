@@ -1,10 +1,10 @@
 import { useContext, useEffect, useRef } from "react";
-import { UserContext } from "../contexts/User/UserProvider";
 import WelcomeScreen from "./WelcomeScreen";
 import DataContext from "../contexts/Data/DataContext";
 import convertToHumanFriendlyDate from "../Utilities/convertToHumanFriendlyDate";
 
 import { isMobile } from "react-device-detect";
+import UserContext from "../contexts/User/UserContext";
 
 export default function ChatSection() {
 	const { messages, selectedUser } = useContext(DataContext); // Accessing the messages from the DataContext for their display

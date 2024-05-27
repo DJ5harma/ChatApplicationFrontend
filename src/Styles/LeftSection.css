@@ -9,8 +9,30 @@
 		width: 100%;
 		/* border-top: solid; */
 	}
+	#searchBox {
+		display: flex;
+		justify-content: space-around;
+		display: flex;
+		flex-direction: column;
+		/* padding: 10px; */
+
+		input {
+			font-size: 20px;
+		}
+	}
 	#usersSection {
 		padding: 0 10px;
+		flex: 10;
+		overflow-y: auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 10px;
+
+		input {
+			width: 100%;
+			font-size: large;
+		}
 
 		.singleUser {
 			position: relative;
@@ -20,9 +42,6 @@
 			align-items: center;
 			border: solid 2px;
 			border-radius: 10px;
-
-			margin: 10px 0;
-
 			cursor: pointer;
 
 			/* animation: forwards 1s fadeOut; */
