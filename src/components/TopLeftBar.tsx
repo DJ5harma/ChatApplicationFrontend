@@ -38,7 +38,7 @@ export default function TopLeftBar({
 				</span>
 			</p>
 			<span style={{ textAlign: "center" }}>
-				{!isMobile && "|"}othersOnline: {numberOfOnlineUsers - 1}
+				{!isMobile && "|"} othersOnline: {numberOfOnlineUsers - 1}
 			</span>
 			<button
 				onClick={() => {
