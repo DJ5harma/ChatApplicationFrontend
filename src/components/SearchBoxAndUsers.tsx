@@ -5,7 +5,8 @@ import { UserType } from "../Utilities/DataTypes";
 import UserContext from "../contexts/User/UserContext";
 
 export default function SearchBoxAndUsers() {
-	const { users, onlineUsers, messages } = useContext(DataContext);
+	const { users, onlineUsers, messages, selectedUser } =
+		useContext(DataContext);
 
 	const { username } = useContext(UserContext);
 
@@ -26,7 +27,7 @@ export default function SearchBoxAndUsers() {
 		});
 
 		setNewUsers([...newUsers]);
-	}, [messages]); // Sorts the users to be shown in ascending order of the last message they sentge
+	}, [messages]); // Sorts the users to be shown in ascending order of the last message they sent
 
 	const [found, setFound] = useState(true);
 
@@ -47,13 +48,19 @@ export default function SearchBoxAndUsers() {
 					}}
 				/>
 			</div>
+			<SingleUser
+				key={selectedUser._id}
+				thisSingleUser={selectedUser}
+				isOnline={onlineUsers.has(selectedUser.username)}
+			/>
 			{newUsers
 				.filter(
 					(user) =>
 						user.username
 							.toLowerCase()
 							.includes(query.toLowerCase()) &&
-						user.username !== username
+						user.username !== username &&
+						user.username !== selectedUser.username
 				)
 				.map((user) => {
 					if (!found) setFound(true);
