@@ -34,14 +34,19 @@ export default function Home({ wss }: { wss: WebSocket }) {
 	}, []);
 
 	const LeftSection = () => {
-		if (loading) return <Loading />;
 		return (
 			<div id="leftSection">
-				<TopLeftBar
-					numberOfOnlineUsers={numberOfOnlineUsers}
-					wss={wss}
-				/>
-				<SearchBoxAndUsers />
+				{loading ? (
+					<Loading />
+				) : (
+					<>
+						<TopLeftBar
+							numberOfOnlineUsers={numberOfOnlineUsers}
+							wss={wss}
+						/>
+						<SearchBoxAndUsers />
+					</>
+				)}
 			</div>
 		);
 	};
