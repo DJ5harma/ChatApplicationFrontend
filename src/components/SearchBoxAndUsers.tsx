@@ -48,11 +48,13 @@ export default function SearchBoxAndUsers() {
 					}}
 				/>
 			</div>
-			<SingleUser
-				key={selectedUser._id}
-				thisSingleUser={selectedUser}
-				isOnline={onlineUsers.has(selectedUser.username)}
-			/>
+			{selectedUser._id != "null" && (
+				<SingleUser
+					key={selectedUser._id}
+					thisSingleUser={selectedUser}
+					isOnline={onlineUsers.has(selectedUser.username)}
+				/>
+			)}
 			{newUsers
 				.filter(
 					(user) =>
